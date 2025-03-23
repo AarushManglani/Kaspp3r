@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            max-width: 800px;
+        }
+        h1, h2 {
+            color: #0d6efd;
+        }
+        .prediction-box {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .prediction-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .btn-primary {
+            margin-top: 20px;
+        }
+        .user-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Insurance Results</h1>
+        <div class="user-info">
+            <h4>Your Information</h4>
+            <div class="row">
+                <div class="col-md-4"><strong>Age:</strong> {{ user_data.age }}</div>
+                <div class="col-md-4"><strong>Children:</strong> {{ user_data.children }}</div>
+                <div class="col-md-4"><strong>BMI:</strong> {{ user_data.bmi }}</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><strong>Gender:</strong> {{ user_data.sex }}</div>
+                <div class="col-md-4"><strong>Smoker:</strong> {{ user_data.smoker }}</div>
+                <div class="col-md-4"><strong>Region:</strong> {{ user_data.region }}</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6"><strong>Physical Impairment:</strong> {{ user_data.impairments }}</div>
+                <div class="col-md-6"><strong>Mental Disability:</strong> {{ user_data.mental_disability }}</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6"><strong>Preference:</strong> {{ user_data.aorp }}</div>
+                {% if user_data.aorp == 'affordability' and user_data.budget %}
+                <div class="col-md-6"><strong>Budget:</strong> ₹{{ user_data.budget }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="prediction-box">
+            <h3>Predicted Annual Medical Charges</h3>
+            <div class="prediction-value">₹{{ "%.2f"|format(predicted_charges) }}</div>
+        </div>
+        
+        <h2>{{ plan_message }}</h2>
+        
+        {% if recommended_plans %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Plan Name</th>
+                        <th>Plan ID</th>
+                        <th>Monthly Premium (₹)</th>
+                        {% if user_data.aorp == 'risk protection' %}
+                        <th>Max Coverage (₹)</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for plan in recommended_plans %}
+                    <tr>
+                        <td>{{ plan['Plan Name'] }}</td>
+                        <td>{{ plan['Plan ID'] }}</td>
+                        <td>{{ plan['Monthly Premium'] }}</td>
+                        {% if user_data.aorp == 'risk protection' %}
+                        <td>{{ plan['Max Coverage'] }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>{{ plan_message }}</p>
+        {% endif %}
+        
+        <a href="/" class="btn btn-primary">Calculate Again</a>
+    </div>
+</body>
+</html>

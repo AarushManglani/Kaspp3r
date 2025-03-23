@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Insurance Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+        h1 {
+            color: #0d6efd;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Medical Insurance Calculator</h1>
+        
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" class="form-control" id="age" name="age" required min="1" max="120">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="children">Number of Children:</label>
+                        <input type="number" class="form-control" id="children" name="children" required min="0" max="20">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bmi">BMI:</label>
+                        <input type="number" step="0.01" class="form-control" id="bmi" name="bmi" required min="10" max="60">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sex">Gender:</label>
+                        <select class="form-control" id="sex" name="sex" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="smoker">Smoker:</label>
+                        <select class="form-control" id="smoker" name="smoker" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="region">Region:</label>
+                        <select class="form-control" id="region" name="region" required>
+                            <option value="urban">Urban</option>
+                            <option value="suburban">Suburban</option>
+                            <option value="rural">Rural</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="impairments">Physical Impairment:</label>
+                        <select class="form-control" id="impairments" name="impairments" required>
+                            <option value="none">None</option>
+                            <option value="hearing">Hearing</option>
+                            <option value="mobility">Mobility</option>
+                            <option value="visual">Visual</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mental_disability">Mental Disability:</label>
+                        <select class="form-control" id="mental_disability" name="mental_disability" required>
+                            <option value="none">None</option>
+                            <option value="anxiety">Anxiety</option>
+                            <option value="depression">Depression</option>
+                            <option value="schizophrenia">Schizophrenia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="aorp">Preference:</label>
+                        <select class="form-control" id="aorp" name="aorp" required onchange="toggleBudget()">
+                            <option value="affordability">Affordability</option>
+                            <option value="risk protection">Risk Protection</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="budget-row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="budget">Yearly Budget (₹):</label>
+                        <input type="number" class="form-control" id="budget" name="budget" min="1000">
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Calculate Insurance Options</button>
+        </form>
+    </div>
+    
+    <script>
+        function toggleBudget() {
+            const aorp = document.getElementById('aorp').value;
+            const budgetRow = document.getElementById('budget-row');
+            
+            if (aorp === 'affordability') {
+                budgetRow.style.display = 'block';
+                document.getElementById('budget').setAttribute('required', 'required');
+            } else {
+                budgetRow.style.display = 'none';
+                document.getElementById('budget').removeAttribute('required');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', toggleBudget);
+    </script>
+</body>
+</html>

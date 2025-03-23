@@ -1,0 +1,11 @@
+Plan ID,Plan Name,Monthly Premium,Annual Deductible,Coverage Percentage,Maternity Coverage,Pre-existing Condition Coverage,Max Coverage,Company
+P1,Basic Health,2000,5000,70,No,No,87500,ABC Solutions
+P2,Silver Care,3000,4000,80,No,Yes,100000,DJA Insurers
+P3,Gold Shield,4500,3000,85,Yes,Yes,106250,DJA Insurers
+P4,Platinum Plus,6000,2000,90,Yes,Yes,112500,PEN Insurance
+P5,Family First,5000,3500,85,Yes,Yes,106250,EXO Capital
+P6,Maternity Special,5500,2500,88,Yes,Yes,110000,PEN Insurance
+P7,Wellness Pro,4000,4000,80,No,No,100000,DJA Insurers
+P8,Senior Secure,3500,4500,75,No,Yes,93750,EXO Capital
+P9,Pre-Existing Cover,4800,3000,85,No,Yes,106250,ABC Solutions
+P10,Comprehensive Care,7000,1500,95,Yes,Yes,118750,PEN Insurance
